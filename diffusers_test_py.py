@@ -8,7 +8,7 @@ pipeline = AutoPipelineForText2Image.from_pretrained(
 
 prompt = "green car"
 
-generated_image = pipeline(prompt, num_inference_steps=2).images[0]
+generated_image = pipeline(prompt, num_inference_steps=50).images[0]
 
 plt.imshow(generated_image)
 plt.show()
