@@ -7,7 +7,7 @@ path_video = current_path + "/generated_video/output_video.mp4"
 
 width_image = 500
 height_image = 500
-fps = 1
+fps = 10
 
 def generate_video():
     images_array = []
@@ -31,6 +31,8 @@ def generate_video():
 
     for image in images_array:
         os.remove(image)
+
+generate_video()
 
 
 
