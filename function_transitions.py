@@ -4,7 +4,7 @@ import os
 current_path = os.path.dirname(__file__)
 images_path = os.path.join(current_path, "generated_images")
 
-samples = 100
+samples = 10
 
 def calc_alpha(samples, current_value):
     start_value = 0.1
@@ -12,8 +12,8 @@ def calc_alpha(samples, current_value):
     step_value = (end_value - start_value) / (samples - 1)
     return start_value + current_value * step_value 
 
-width_image = 500
-height_image = 500
+width_image = 3840
+height_image = 2160
 
 def create_transition(img_transition_1, img_transition_2, output_folder, samples, img_sequence):
     for j in range(samples):

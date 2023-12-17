@@ -16,34 +16,37 @@ def generate_image(input_songname, input_artist):
 
     value_samples = 0
 
-    # Pfad zur Zusammenfassungsdatei
-    summary_file = current_path + f"//lyrics_{input_songname}_{input_artist}.txt"
-
     # Pfad für die generierten Bilder
-    output_folder = current_path + "//generated_images//"
+    output_folder = current_path + "/generated_images/"
+    
+    # Pfad zur Textdatei mit den zusammengefassten Songtexten
+    text_file_part_1 = current_path + f"//lyrics_{input_songname}_{input_artist}_part1.txt"
+    text_file_part_2 = current_path + f"//lyrics_{input_songname}_{input_artist}_part2.txt"
+    text_file_part_3 = current_path + f"//lyrics_{input_songname}_{input_artist}_part3.txt"
+    
+    
+    for part in [text_file_part_1, text_file_part_2, text_file_part_3]:
+        while value_samples < samples:
+            pipeline = AutoPipelineForText2Image.from_pretrained(
+                pretrained_model, 
+                torch_dtype=torch.float16, 
+                safety_checker=None, 
+                requires_safety_checker=False
+            ).to("cuda")
+            
+            with open(part, "r", encoding="utf-8") as file:
+                prompt = file.read()
 
-    while value_samples < samples:
-        pipeline = AutoPipelineForText2Image.from_pretrained(
-            pretrained_model, 
-            torch_dtype=torch.float16, 
-            safety_checker=None, 
-            requires_safety_checker=False
-        ).to("cuda")
+            # Generiere den Dateinamen für das Bild
+            random_name = random.randint(1000, 9999)  
+            image_path = output_folder + f"output_{random_name}.png"
 
-        # Pfad zur Textdatei mit den zusammengefassten Songtexten
-        text_file = current_path + f"//lyrics_{input_songname}_{input_artist}.txt"
+            # Generiere das Bild
+            generated_image = pipeline(prompt, num_inference_steps=steps).images[0]
 
-        with open(text_file, "r", encoding="utf-8") as file:
-            prompt = file.read()
+            # Speichere das Bild
+            generated_image.save(image_path)
 
-        # Generiere den Dateinamen für das Bild
-        random_name = random.randint(1000, 9999)  
-        image_path = output_folder + f"output_{random_name}.png"
+            value_samples += 1
+            
 
-        # Generiere das Bild
-        generated_image = pipeline(prompt, num_inference_steps=steps).images[0]
-
-        # Speichere das Bild
-        generated_image.save(image_path)
-
-        value_samples += 1
