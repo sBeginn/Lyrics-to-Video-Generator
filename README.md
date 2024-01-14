@@ -2,7 +2,7 @@
 
 With this repository you can automatically receive a generated music video in a very short time by entering a song name and the artist.
 
-## **Installation (takes 5-10 Minutes**
+## **Installation (takes 5-10 minutes)**
 
 First, you need to clone the respoitory:
 ```
@@ -33,7 +33,7 @@ pip install -r requirements.txt
   - Client Secret in variable ```SPOTIPY_CLIENT_SECRET =``` in line 11
   - Redirect URI in variable ```SPOTIPY_REDIRECT_URI = http://localhost:3000 ``` in line 12 (or change http://localhost:3000 with that what you enter in the spotify app information)
   
-
+**Installation complete**
 
 
 ## **Run**
