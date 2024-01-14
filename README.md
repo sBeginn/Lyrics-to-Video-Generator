@@ -1,3 +1,2 @@
-# Lyrics-Image-Generator
+# Lyrics2Video Generator
 
-Lyrics to Image Generator
