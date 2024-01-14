@@ -1,12 +1,21 @@
 from function_generate_images import generate_image
+from function_generate_images import samples
+from function_generate_images import steps
 from function_images_to_video import generate_video
-from function_read_lyrics_2 import read_lyrics
-from function_read_lyrics_2 import spacy_words
+from function_images_to_video import fps
+from function_read_lyrics import read_lyrics
+from function_read_lyrics import spacy_words
 from function_transitions import transitions
+from function_warp_affine import generate_rotated_images
+from function_warp_affine import song_duration
+from function_audio_connection import download_audio
+from function_audio_connection import audio_with_video_conncetion
 import function_generate_images 
 import function_images_to_video
-import function_read_lyrics_2
+import function_read_lyrics
 import function_transitions
+import function_audio_connection
+import function_warp_affine
 import os
 
 current_path = os.path.dirname(__file__)
@@ -20,18 +29,21 @@ if not os.path.exists(folder_generated_video):
     os.makedirs(folder_generated_video)
 
 
-#Variablen aus den anderen Files sollen hier noch hinzugefügt werden, damit die hier im main.py geändert werden können (z.B. wie viele Bilder generiert werden usw.)
-function_generate_images.steps = 50
-function_images_to_video.fps = 1
-function_generate_images.samples = 3
-function_transitions.samples = 10
-
-def main(input_songname, input_artist):
+def main():
+    input_songname = input("Songname:")
+    input_artist = input("Artist:")
+    input_url = input("url:")
+    samples_warp = song_duration(input_songname, input_artist)
+    
     read_lyrics(input_songname, input_artist)
     spacy_words(input_songname, input_artist)
     generate_image(input_songname, input_artist)
-    transitions(function_transitions.samples)
+    generate_rotated_images(samples_warp)
     generate_video()
+    download_audio(input_url)
+    audio_with_video_conncetion()
 
-main("Five Little Ducks", "Raffi")
+main()
+
+
 

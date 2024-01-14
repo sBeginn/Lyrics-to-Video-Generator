@@ -1,7 +1,10 @@
-from lyricsgenius import Genius
+import spacy
+from sklearn.feature_extraction.text import TfidfVectorizer
 import os
+from lyricsgenius import Genius
 import re
-from transformers import pipeline
+import random
+
 
 token = "SJT0EPoDLSVfMvvdwbQ41GTyplVGUIjG_N8UxVSCpNtyY6mbtSEq4FrwfxEKwRuD"
 genius = Genius(token)
@@ -11,6 +14,7 @@ current_path = os.path.dirname(__file__)
 def remove_bracketed_text(text):
     # Entfernt alles zwischen eckigen Klammern, einschließlich der Klammern selbst
     return re.sub(r'\[.*?\]', '', text)
+
 
 
 def read_lyrics(input_songname, input_artist):
@@ -32,37 +36,52 @@ def read_lyrics(input_songname, input_artist):
         myfile.close()
     else:
         print("Not found")
-        
-        
 
-def text_summarizer(input_songname, input_artist):
-    summarizer = pipeline("summarization", model="t5-base", tokenizer="t5-base", framework="tf")
+
+def spacy_words(input_songname, input_artist):
+    nlp = spacy.load("en_core_web_sm")
 
     file_lyrics = current_path + f"//lyrics_{input_songname}_{input_artist}.txt"
-
+    
     with open(file_lyrics, "r", encoding="utf-8") as file:
-        text = file.read()
-
+        lyrics = file.read()
+        
     # Split the text into three parts
-    total_length = len(text)
+    total_length = len(lyrics)
     part_length = total_length // 3
 
-    part1 = text[:part_length]
-    part2 = text[part_length:2 * part_length]
-    part3 = text[2 * part_length:]
+    part1 = lyrics[:part_length]
+    part2 = lyrics[part_length:2 * part_length]
+    part3 = lyrics[2 * part_length:]
+    
+    
+    for i, part in enumerate([part1, part2, part3]):
+        
+        about_doc = nlp(part)
+        
+        unique_nouns = set()
+        #unique_adjectives = set()
+        
+        for token in about_doc:
+            if token.pos_ == "NOUN" and token.lemma_ in nlp.vocab:
+                noun_lemma = token.lemma_.lower()
+                unique_nouns.add(noun_lemma)
 
-    # Generate summaries for each part
-    summaries = []
-
-    for part in [part1, part2, part3]:
-        summary_text = summarizer(part, max_length=50, min_length=5, do_sample=False)[0]['summary_text']
-        summaries.append(summary_text)
-
-    # Write summaries to separate files
-    for i, summary in enumerate(summaries):
+            #if token.pos_ == "ADJ" and token.lemma_ in nlp.vocab:
+                #adj_lemma = token.lemma_.lower()
+                #unique_adjectives.add(adj_lemma)
+        
+        # Randomly select up to three words from each set
+        selected_nouns = random.sample(list(unique_nouns), min(2, len(unique_nouns)))
+        #selected_adjectives = random.sample(list(unique_adjectives), min(1, len(unique_adjectives)))
+       
+                
         summary_file = current_path + f"//lyrics_{input_songname}_{input_artist}_part{i+1}.txt"
         with open(summary_file, "w", encoding="utf-8") as file:
-            file.write(summary)
+            file.write(", ".join(selected_nouns) + ", ")
+            #file.write(", ".join(selected_adjectives))        
+        
+
 
 
 

@@ -4,7 +4,7 @@ import os
 current_path = os.path.dirname(__file__)
 images_path = os.path.join(current_path, "generated_images")
 
-samples = 10
+samples = 100
 
 def calc_alpha(samples, current_value):
     start_value = 0.1
@@ -26,7 +26,7 @@ def create_transition(img_transition_1, img_transition_2, output_folder, samples
 def transitions(samples):
     images_array = []
 
-    for image_file in os.listdir(images_path):
+    for image_file in sorted(os.listdir(images_path)):
         image_path = os.path.join(images_path, image_file)
         images_array.append(image_path)
 
@@ -43,4 +43,4 @@ def transitions(samples):
     for image_file in images_array:
         os.remove(image_file)
 
-transitions(samples)
+

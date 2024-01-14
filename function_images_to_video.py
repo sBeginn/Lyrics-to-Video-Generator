@@ -8,12 +8,12 @@ path_video = current_path + "/generated_video/output_video.mp4"
 
 width_image = 3840
 height_image = 2160
-fps = 1
+fps = 3
 
 def generate_video():
     images_array = []
 
-    for image_file in os.listdir(path_images):
+    for image_file in sorted(os.listdir(path_images)):
         image_path = os.path.join(path_images, image_file)
         images_array.append(image_path)
 
@@ -32,8 +32,8 @@ def generate_video():
 
     for image in images_array:
         os.remove(image)
-        
-generate_video()
+
+
 
 
 
