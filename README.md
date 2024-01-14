@@ -1,10 +1,8 @@
 # Lyrics2Video Generator
 
-## **Installation**
-
 With this repository you can automatically receive a generated music video in a very short time by entering a song name and the artist.
 
-
+## **Installation**
 
 First, you need to clone the respoitory:
 ```
