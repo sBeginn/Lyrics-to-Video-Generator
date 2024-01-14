@@ -1,1 +1,11 @@
-
+pytube==15.0.0
+moviepy==1.0.3
+diffusers==0.23.0
+matplotlib==3.8.0
+torch ==2.1.0+cu118
+opencv-python==4.8.1.78
+spacy==3.7.2
+scikit-learn==1.3.2
+lyricsgenius==3.0.1
+spotipy==2.23.0
+streamlit==1.29.0
