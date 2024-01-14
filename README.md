@@ -42,5 +42,6 @@ Run **main.py** and you can enter in the terminal the following information:
   - Songname (complete songname, but capitalization doesn't matter)
   - Artist (If several -> Normally one artist is enough)
   - URL (Enter a URL from Youtube of this song, so the generated video has the fitting song as a audio)
+
 When it is finished -> You will find your video in the folder "generated_video"
 
