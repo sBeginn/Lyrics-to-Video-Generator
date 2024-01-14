@@ -19,5 +19,12 @@ After that you can install the necessary libraries:
 pip install -r requirements.txt
 ```
 
+- Go to ```https://genius.com/api-clients``` and create Account or log in.
+- Now click on "New API Client" and enter the information (It is not relevant what you enter there)
+- After this click on "Generate Access Token" and copy the token.
+- Enter this token in the file function_read_lyrics.py in the variable "token" in line 9.
+
+
+
 ## **Run**
 
