@@ -18,13 +18,13 @@ After that you can install the necessary libraries:
 ```
 pip install -r requirements.txt
 ```
-### Genius conncetion:
+### Genius connection:
 - Go to ```https://genius.com/api-clients``` and create account or log in
 - Now click on "New API Client" and enter the information (It is not relevant what you enter there)
 - After this click on "Generate Access Token" and copy the token
 - Enter this token in the file **function_read_lyrics.py** in the variable ```token = ``` in line 9
 
-### Spotify conncetion:
+### Spotify connection:
 - Go to ```https://developer.spotify.com/``` and create Account or log in
 - Go to ```https://developer.spotify.com/dashboard``` and click on "create app" and enter in Redirect URI: "http://localhost:3000" and enter the other information (This information are also not relevant)
 - After this click on "settings" and copy the Client ID and Client Secret.
@@ -37,4 +37,7 @@ pip install -r requirements.txt
 
 
 ## **Run**
+
+Run **main.py**
+
 
