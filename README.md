@@ -1,6 +1,6 @@
 # Lyrics2Video Generator
 
-With this repository you can automatically receive a generated music video in a very short time by entering a song name and the artist.
+With this repository you can automatically receive a generated music video in a very short time by entering a song name. the artist and a YouTube Link.
 
 ## **Installation (takes 5-10 minutes)**
 
