@@ -109,7 +109,7 @@ def song_duration(input_songname, input_artist):
         # Song duration in seconds
         duration_sec = duration_ms // 1000
         
-        # Calculate the number of images that need to be generated -> Its important because we want that the video has the same length as the song 
+        # Calculate the number of images that need to be generated -> It is important because we want that the video has the same length as the song 
         samples_warp = int((duration_sec * function_images_to_video.fps) / (function_generate_images.samples * 3))
 
         # Return the number
